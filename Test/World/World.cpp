@@ -19,11 +19,9 @@ using namespace shootergame;
 
 
 
-World::World(const age::File &world_folder) : ParentNode(), world_folder(world_folder) {
+World::World(const age::File &world_folder) : world_folder(world_folder) {
 	
-	// Create and add the player
-	player = new Player();
-	this->AddChild("Player", player);
+	
 }
 
 World* World::New(const age::File &world_folder) {
@@ -52,11 +50,14 @@ void World::ChangeDimension(const std::string &name) {
 }
 Dimension* World::LoadDimension(const std::string &name) {
 	if ( IsDimensionLoaded(name) ) {
-		return (Dimension*)GetChild(name);
+		for (auto dim : loaded_dimensions)
+			if ( dim->GetName().compare(name) == 0 ) return dim;
+		return nullptr;
 	}
 	else {
 		Dimension *dim = Dimension::Open(this, name);
-		AddChild(name, dim);
+		loaded_dimensions.push_back(dim);
+		
 		return dim;
 	}
 }
@@ -67,12 +68,11 @@ Dimension* World::LoadDimension(const std::string &name) {
 
 
 void World::Update(const age::UpdateInfo &info) {
-	ParentNode::Update(info);
-	current_dimension->Update(info);
+	for (auto dimension : loaded_dimensions)
+		dimension->Update(info);
 }
 void World::Render(const age::UpdateInfo &info) {
-	ParentNode::Render(info);
-//	current_dimension->Render(info);
+	current_dimension->Render(info);
 }
 
 

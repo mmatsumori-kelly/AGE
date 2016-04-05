@@ -35,19 +35,19 @@ namespace age {
 			
 			
 			/** Transfers ownership to this parent node */
-			void AddChild(const std::string &name, ISceneNode* node)    {
+			virtual void AddChild(const std::string &name, ISceneNode* node)    {
 				if ( node != nullptr ) {
 					children[name] = node;
 					node->parent = this;
 				}
 			}
-			void RemoveChild(const std::string &name) {
+			virtual void RemoveChild(const std::string &name) {
 				children.erase(name);
 			}
-			bool ContainsChild(const std::string &name) const {
+			inline bool ContainsChild(const std::string &name) const {
 				return children.count(name) != 0;
 			}
-			ISceneNode* GetChild(const std::string &name) {
+			inline ISceneNode* GetChild(const std::string &name) {
 				return children[name];
 			}
 			

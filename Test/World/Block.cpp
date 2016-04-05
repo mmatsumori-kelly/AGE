@@ -14,18 +14,25 @@
 using namespace age;
 using namespace age::video;
 using namespace age::scripting;
+using namespace age::scene;
 using namespace shootergame;
 
 
 
 
 
-Block::Block(int type, Chunk *chunk, const age::IVec3 &position) : block_id(type), chunk(chunk), position(position) {
+Block::Block(int type, Chunk *chunk, const age::IVec3 &position)
+: block_id(type), chunk(chunk), position(position) {
 	state = &GetBlockState(block_id);
 	try {
-		is_solid = state->GetGlobal("IsSolid")(this);
+//		is_solid = state->GetGlobal("IsSolid")(this);
+		is_solid = true;
 	} catch (...) {}
-//	is_solid = true;
+	
+	
+	float x = chunk->GetX() * ChunkWidth  + position.x;
+	float z = chunk->GetZ() * ChunkLength + position.z;
+	hitbox = AABBHitbox(FVec3(x + 0.5f, position.y + 0.5f, z + 0.5f), FVec3(0.5f, 0.5f, 0.5f));
 }
 
 

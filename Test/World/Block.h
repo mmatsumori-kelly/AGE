@@ -9,10 +9,11 @@
 #ifndef __AGE__Block__
 #define __AGE__Block__
 
-#include "Vector.h"
+#include <AGE/Vector.h>
 #include <AGE/Debug.h>
 #include <AGE/Video/ManualModel.h>
 #include <AGE/Scripting/LuaScript.h>
+#include "Hitbox.h"
 
 
 namespace shootergame {
@@ -27,15 +28,26 @@ namespace shootergame {
 		
 		bool is_solid;
 		
+		AABBHitbox hitbox;
+		
 	public:
 		
 		Block(int type, Chunk *chunk, const age::IVec3 &position);
+		
+		
 		
 		
 		/** Returns the chunk */
 		inline Chunk* GetChunk() {
 			return chunk;
 		}
+		
+		/** Returns the hitbox */
+		inline const AABBHitbox& GetHitbox() const {
+			return hitbox;
+		}
+		
+		
 		
 		/** Return the position */
 		inline const age::IVec3& GetPosition() {

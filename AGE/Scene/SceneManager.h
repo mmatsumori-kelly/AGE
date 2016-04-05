@@ -11,8 +11,8 @@
 
 #include "ParentNode.h"
 #include "../Update.h"
-#include "ICamera.h"
-#include "PhysicsManager.h"
+#include "Camera.h"
+#include "PhysicsWorld.h"
 
 namespace age {
 	class AGEDevice;
@@ -22,7 +22,7 @@ namespace age {
 		class SceneManager : public Updatable, public Renderable, public IRefCounted {
 			ParentNode *parent_node;
 			AGEDevice *device;
-			ICamera *camera;
+			Camera *camera;
 			
 			
 		public:
@@ -41,11 +41,12 @@ namespace age {
 			
 			
 			/** Returns the camera */
-			inline ICamera* GetCamera() {
+			inline Camera* GetCamera() {
 				return camera;
 			}
 			/** Sets the camera. This takes ownership of the camera */
-			inline void SetCamera(ICamera *camera) {
+			inline void SetCamera(Camera *camera) {
+				delete this->camera;
 				this->camera = camera;
 			}
 			

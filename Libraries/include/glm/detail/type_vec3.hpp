@@ -48,6 +48,10 @@ namespace glm
 	struct tvec3
 	{
 		// -- Implementation detail --
+		
+		tvec3<T, P> Add(const tvec3<T, P> &vec) {
+			return tvec3<T, P>(x + vec.x, y + vec.y, z + vec.z);
+		}
 
 		typedef tvec3<T, P> type;
 		typedef tvec3<bool, P> bool_type;

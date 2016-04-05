@@ -9,6 +9,8 @@
 #ifndef __AGE__Keyboard__
 #define __AGE__Keyboard__
 
+#include <string>
+
 namespace age {
 	namespace gui {
 		enum Key {
@@ -114,7 +116,8 @@ namespace age {
 			
 			
 			bool IsKeyPressed(Key key);
-			bool IsKeyPressed(char key);
+			bool IsKeyCharPressed(char key);
+			bool IsKeyNamePressed(const std::string &name);
 		};
 		
 		/** Converts a character to a key */

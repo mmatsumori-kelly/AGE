@@ -8,12 +8,15 @@
 
 #include "GameScripting.h"
 #include <AGE/Video/IModel.h>
+#include <AGE/Scene/ActorNode.h>
 #include "Game.h"
-#include "TextureAtlas.h"
+#include "World/Entity/Entity.h"
+#include "World/TextureAtlas.h"
 
 using namespace age;
 using namespace age::video;
 using namespace age::scripting;
+using namespace age::scene;
 using namespace shootergame;
 
 
@@ -64,6 +67,14 @@ void LoadGameLibrary(LuaState &state) {
 	.addFunction("GetChunk", &Block::GetChunk)
 	.endClass()
 	
+	.beginClass<Entity>("Entity")
+	.addFunction("GetPosition", &Entity::GetPosition)
+	.addFunction("GetRotation", &Entity::GetRotation)
+	.addFunction("SetPosition", &Entity::SetPosition)
+	.addFunction("SetRotation", &Entity::SetRotation)
+	.endClass()
+	
+	
 	
 	.beginClass<TextureAtlas<TEXTURE_ATLAS_BLOCK>>("BlockTexture")
 	.addStaticFunction("GetTexCoord", &TextureAtlas<TEXTURE_ATLAS_BLOCK>::GetTextureCoords)
@@ -77,8 +88,6 @@ void LoadGameLibrary(LuaState &state) {
 void shootergame::LoadGameLibraries(LuaState &state) {
 	
 	// Add game folders
-	
-	
 	state["game_folder"] = Game::Current()->GetGameFolder().GetPath().c_str();
 	state["model_folder"] = Game::Current()->GetModelFolder().GetPath().c_str();
 	state["shader_folder"] = Game::Current()->GetShaderFolder().GetPath().c_str();
@@ -86,11 +95,16 @@ void shootergame::LoadGameLibraries(LuaState &state) {
 	state["texture_folder"] = Game::Current()->GetTextureFolder().GetPath().c_str();
 	
 	
+	// Add some other stuff
+	state.SetGlobal("display", Game::Current()->GetDevice()->GetDisplay());
+	state.SetGlobal("scene_manager", Game::Current()->GetDevice()->GetSceneManager());
+	
+	
 	// Register some stuff for Lua
-	
-	
 	LoadUtilLibrary(state);
 	LoadGameLibrary(state);
+	
+	
 	
 }
 

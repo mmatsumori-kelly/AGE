@@ -17,15 +17,19 @@ namespace shootergame {
 	
 	
 	class Player : public Entity {
+		float movement_speed;
+		bool is_mouse_down, was_mouse_down;
 		
+		
+		
+		void MouseDown();
+		void MouseUp();
 		
 	public:
-		Player();
-		
+		Player(Dimension *dimension);
 		
 		virtual void Update(const age::UpdateInfo &info) override;
 		virtual void Render(const age::UpdateInfo &info) override;
-		
 	};
 	
 	

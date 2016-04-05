@@ -11,13 +11,13 @@
 #include "../Game.h"
 #include "TypeRegistry.h"
 #include "TextureAtlas.h"
-#include <AGE/Thread.h>
+#include "Entity/Player.h"
 
 
 
 using namespace age;
+using namespace age::scene;
 using namespace age::video;
-
 using namespace shootergame;
 
 
@@ -26,6 +26,12 @@ Dimension::Dimension(World *world, const std::string &name) : world(world), name
 	save_folder = File(world->GetSaveFolder().GetChild(name));
 	save_folder.MakeDirectory();
 	GetChunksFolder().MakeDirectory();
+	
+	// Entities
+	entities.reserve(128);
+	
+	player = new Player(this);
+	AddEntity(player);
 	
 	
 	// Load the shaders
@@ -37,23 +43,21 @@ Dimension::Dimension(World *world, const std::string &name) : world(world), name
 	delete vert_source;
 	delete frag_source;
 }
-
 Dimension::~Dimension() {
-	
+	for (auto chunk : loaded_chunks) {
+		delete chunk.second;
+	}
 }
-
 Dimension* Dimension::Open(World *world, const std::string &name) {
-	
-	Dimension *dim = new Dimension(world, name);
-	
-	return dim;
+	return new Dimension(world, name);
 }
 
 
-
-void LoadChunkThread(void *chunk_out_ptrptr) {
-	
+void Dimension::AddEntity(shootergame::Entity *e) {
+	entities.push_back(e);
 }
+
+
 
 
 Chunk* Dimension::LoadChunk(int x, int z) {
@@ -72,7 +76,7 @@ void Dimension::UnloadChunk(int x, int z) {
 		
 		// Delete the chunk
 		Chunk *chunk = GetChunk(x, z, false);
-		chunk->Save();
+//		chunk->Save();
 		delete chunk;
 		
 		loaded_chunks.erase(IntPair(x, z));
@@ -85,10 +89,19 @@ void Dimension::UnloadChunk(int x, int z) {
 
 void Dimension::Update(const age::UpdateInfo &info) {
 	
+	for (Entity *e : entities)
+		e->Update(info);
+	
 	
 }
 void Dimension::Render(const age::UpdateInfo &info) {
-	Player *player = GetWorld()->GetPlayer();
+	
+	
+	for (Entity *e : entities)
+		e->Render(info);
+	
+	
+	
 	FVec3 player_position = player->GetPosition();
 	
 	int chunk_x = (int)player_position.x / ChunkWidth;
@@ -98,17 +111,18 @@ void Dimension::Render(const age::UpdateInfo &info) {
 	
 	TextureAtlas<TEXTURE_ATLAS_BLOCK>::GetTexture()->BindTexture();
 	shader_program.UseProgram();
-	GetWorld()->GetSceneManager()->GetCamera()->Update();
-	GetWorld()->GetSceneManager()->GetCamera()->UpdateProgram(&shader_program, FMat4(1.0f));
+	Game::Current()->GetDevice()->GetSceneManager()->GetCamera()->Update();
+	Game::Current()->GetDevice()->GetSceneManager()->GetCamera()->UpdateProgram(&shader_program, FMat4(1.0f));
 	
 	
-	for (int x = chunk_x - 1; x < chunk_x + 1; ++x) {
-		for (int z = chunk_z - 1; z < chunk_z + 1; ++z) {
+	for (int x = chunk_x - 2; x < chunk_x + 2; ++x) {
+		for (int z = chunk_z - 2; z < chunk_z + 2; ++z) {
 			// Render the chunk
 			Chunk *chunk = GetChunk(x, z, true);
 			chunk->Render(info);
 		}
 	}
+	
 	
 	// Unbind any previously bound resources
 	shader_program.UnbindProgram();

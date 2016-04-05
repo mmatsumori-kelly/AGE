@@ -11,6 +11,7 @@
 
 #include <string>
 #include <iostream>
+#include "Vector.h"
 
 namespace age {
 	
@@ -91,6 +92,14 @@ namespace age {
 		template <typename T>
 		inline SecondMessage& operator <<(const T &t) {
 			std::cout << type_str << GetFormattedTime("[%D %X]: ") << t;
+			return second_message;
+		}
+		inline SecondMessage& operator <<(const age::FVec3 &vec) {
+			std::cout << type_str << GetFormattedTime("[%D %X]: {") << vec.x << ", " << vec.y << ", " << vec.z << "}";
+			return second_message;
+		}
+		inline SecondMessage& operator <<(const age::DVec3 &vec) {
+			std::cout << type_str << GetFormattedTime("[%D %X]: {") << vec.x << ", " << vec.y << ", " << vec.z << "}";
 			return second_message;
 		}
 		

@@ -26,6 +26,7 @@ namespace age {
 	
 	
 	typedef void (*InitCallback)(void);
+	typedef void (*ExitCallback)(void);
 	typedef void (*UpdateCallback)(const UpdateInfo &info);
 	typedef void (*RenderCallback)(const UpdateInfo &info);
 	
@@ -44,6 +45,7 @@ namespace age {
 		UpdateCallback update_callback = nullptr;
 		RenderCallback render_callback = nullptr;
 		InitCallback   init_callback = nullptr;
+		ExitCallback   exit_callback = nullptr;
 		
 		// Timing
 		Atomic<int> fps, ups, locked_fps, locked_ups;
@@ -108,9 +110,13 @@ namespace age {
 		inline void SetUpdateCallback(UpdateCallback callback) {
 			update_callback = callback;
 		}
-		/** Setst eh render callback */
+		/** Sets the render callback */
 		inline void SetRenderCallback(RenderCallback callback) {
 			render_callback = callback;
+		}
+		/** Sets the exit callback */
+		inline void SetExitCallback(ExitCallback callback) {
+			exit_callback = callback;
 		}
 		
 		

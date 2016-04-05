@@ -15,7 +15,7 @@
 namespace age {
 	namespace scripting {
 		
-		
+		typedef luabridge::LuaRef LuaRef;
 		
 		
 		

@@ -40,12 +40,12 @@ namespace age {
 			}
 			
 			/** Returns the keyboard */
-			inline Keyboard& GetKeyboard() {
-				return keyboard;
+			inline Keyboard* GetKeyboard() {
+				return &keyboard;
 			}
 			/** Returns the mouse */
-			inline Mouse& GetMouse() {
-				return mouse;
+			inline Mouse* GetMouse() {
+				return &mouse;
 			}
 			
 			/** Sets if teh mouse is captured or not */

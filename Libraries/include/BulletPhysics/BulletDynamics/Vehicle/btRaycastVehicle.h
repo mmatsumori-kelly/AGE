@@ -11,13 +11,13 @@
 #ifndef BT_RAYCASTVEHICLE_H
 #define BT_RAYCASTVEHICLE_H
 
-#include "BulletDynamics/Dynamics/btRigidBody.h"
-#include "BulletDynamics/ConstraintSolver/btTypedConstraint.h"
+#include "BulletPhysics/BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletPhysics/BulletDynamics/ConstraintSolver/btTypedConstraint.h"
 #include "btVehicleRaycaster.h"
 class btDynamicsWorld;
-#include "LinearMath/btAlignedObjectArray.h"
+#include "BulletPhysics/LinearMath/btAlignedObjectArray.h"
 #include "btWheelInfo.h"
-#include "BulletDynamics/Dynamics/btActionInterface.h"
+#include "BulletPhysics/BulletDynamics/Dynamics/btActionInterface.h"
 
 class btVehicleTuning;
 

@@ -1,21 +1,25 @@
 //
-//  FPSCamera.h
+//  SceneCamera.h
 //  AGE
 //
 //  Created by Mitchell Matsumori-Kelly on 2/27/16.
 //  Copyright (c) 2016 Phoenix. All rights reserved.
 //
 
-#ifndef __AGE__FPSCamera__
-#define __AGE__FPSCamera__
+#ifndef __AGE__SceneCamera__
+#define __AGE__SceneCamera__
 
-#include "ICamera.h"
+
+#include "../Matrix.h"
+#include "../Handle.h"
+#include "../Video/Shader.h"
 
 namespace age {
 	namespace scene {
 		
 		
-		class FPSCamera : public ICamera {
+		
+		class Camera : public IRefCounted {
 			const float MAX_X_ROTATION = 87.0f;
 			FVec3 position, rotation;
 			FMat4 orientation, view_matrix, projection_matrix, vp_matrix;
@@ -27,7 +31,7 @@ namespace age {
 			void CalculateMatrices();
 			
 		public:
-			FPSCamera(float aspect_ratio, float fov, float near_z, float far_z);
+			Camera(float aspect_ratio, float fov, float near_z, float far_z);
 			
 			
 			void Move(const FVec3 &offset) {
@@ -101,21 +105,18 @@ namespace age {
 			inline FVec3 GetDownVector() {
 				return -GetUpVector();
 			}
-
+			
 			
 			
 			
 			
 			/** Updates the camera (recalculates matrices) */
-			virtual void Update() override;
+			virtual void Update();
 			/** Updates a shader program's uniforms */
-			virtual void UpdateProgram(video::ShaderProgram *program, const FMat4 &model_matrix) override;
+			virtual void UpdateProgram(video::ShaderProgram *program, const FMat4 &model_matrix);
 		};
-		
-		
-		
-		
 	}
 }
 
-#endif /* defined(__AGE__FPSCamera__) */
+
+#endif /* defined(__AGE__SceneCamera__) */

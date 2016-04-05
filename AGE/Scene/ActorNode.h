@@ -40,8 +40,20 @@ namespace age {
 			void SetPosition(const FVec3 &position) {
 				this->position = position;
 			}
-			const FVec3& GetPosition() const {
+			void SetRotation(const FVec3 &rotation) {
+				this->rotation = rotation;
+			}
+			void SetVelocity(const FVec3 &velocity) {
+				this->velocity = velocity;
+			}
+			FVec3 GetPosition() const {
 				return position;
+			}
+			FVec3 GetRotation() const {
+				return rotation;
+			}
+			FVec3 GetVelocity() const {
+				return velocity;
 			}
 			
 			void SetModel(video::IModel *model) {

@@ -8,6 +8,7 @@
 
 #include "Keyboard.h"
 #include "Display.h"
+#include "../Strings.h"
 #include <GLFW/glfw3.h>
 
 
@@ -27,8 +28,17 @@ Keyboard::Keyboard(Display *display) : display(display) {
 bool Keyboard::IsKeyPressed(Key key) {
 	return glfwGetKey((GLFWwindow*)display->GetWindowHandle(), (int)key);
 }
-bool Keyboard::IsKeyPressed(char key) {
+bool Keyboard::IsKeyCharPressed(char key) {
 	return glfwGetKey((GLFWwindow*)display->GetWindowHandle(), CharToKey(key));
+}
+bool Keyboard::IsKeyNamePressed(const std::string &name_) {
+	if ( name_.length() == 1 ) return IsKeyCharPressed(name_[0]);
+	else {
+		std::string name = StringToLowercase(name_);
+		if ( StringMatches(name, "space") ) return IsKeyPressed(AGE_KEY_SPACE);
+		else if ( StringMatches(name, "enter") ) return IsKeyPressed(AGE_KEY_ENTER);
+		else return false;
+	}
 }
 
 

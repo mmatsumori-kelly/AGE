@@ -8,6 +8,7 @@
 
 #include "Player.h"
 #include "../../Game.h"
+#include <BulletPhysics/btBulletDynamicsCommon.h>
 
 using namespace age;
 using namespace age::gui;
@@ -18,33 +19,27 @@ using namespace shootergame;
 
 
 
-Player::Player() {
-	FPSCamera *camera = new FPSCamera(1.66f, 45, 0.1f, 100.0f);
-	Game::Current()->GetDevice()->GetSceneManager()->SetCamera(camera);
+Player::Player(Dimension *dimension) : Entity(dimension, 0), movement_speed(1.0f), is_mouse_down(false), was_mouse_down(false) {
 	Game::Current()->GetDevice()->GetDisplay()->CaptureMouse(true);
 	
-	position = FVec3(8, 20, 8);
+	SetPosition(FVec3(0, 20, 0));
 }
 
 
 void Player::Update(const age::UpdateInfo &info) {
 	Entity::Update(info);
-}
-void Player::Render(const age::UpdateInfo &info) {
-	Entity::Render(info);
 	
-	AGEDevice *device = GetParent()->GetSceneManager()->GetDevice();
+	AGEDevice *device = Game::Current()->GetDevice();
 	
 	// Store some useful variables...
-	FPSCamera *camera = (FPSCamera*)device->GetSceneManager()->GetCamera();
-	Mouse &mouse = device->GetDisplay()->GetMouse();
-	Keyboard &keyboard = device->GetDisplay()->GetKeyboard();
+	Camera *camera = device->GetSceneManager()->GetCamera();
+	Mouse *mouse = device->GetDisplay()->GetMouse();
+	Keyboard *keyboard = device->GetDisplay()->GetKeyboard();
 	
 	// Change rotation
 	FVec3 rotation;
-	rotation.x += mouse.GetDeltaY() / 10.0;
-	rotation.y += mouse.GetDeltaX() / 10.0;
-	rotation.z = 0;
+	rotation.x += mouse->GetDeltaY() * info.delta_time.Seconds() * 5;
+	rotation.y += mouse->GetDeltaX() * info.delta_time.Seconds() * 5;
 	camera->Rotate(rotation);
 	
 	rotation = camera->GetRotation();
@@ -54,24 +49,36 @@ void Player::Render(const age::UpdateInfo &info) {
 	
 	// Change position
 	float xm = 0, zm = 0;
-	if ( keyboard.IsKeyPressed(AGE_KEY_W) ) zm++;
-	if ( keyboard.IsKeyPressed(AGE_KEY_S) ) zm--;
-	if ( keyboard.IsKeyPressed(AGE_KEY_D) ) xm++;
-	if ( keyboard.IsKeyPressed(AGE_KEY_A) ) xm--;
+	if ( keyboard->IsKeyPressed(AGE_KEY_W) ) zm++;
+	if ( keyboard->IsKeyPressed(AGE_KEY_S) ) zm--;
+	if ( keyboard->IsKeyPressed(AGE_KEY_D) ) xm++;
+	if ( keyboard->IsKeyPressed(AGE_KEY_A) ) xm--;
 	
 	
-	FVec3 movement;
+	if ( keyboard->IsKeyPressed(AGE_KEY_SPACE) ) velocity.y = 10;
+//	if ( keyboard->IsKeyPressed(AGE_KEY_LEFT_SHIFT) );
 	
-	movement += camera->GetForwardVector() * (float)info.delta_time.Seconds() * zm * 2.0f;
-	movement += camera->GetRightVector() * (float)info.delta_time.Seconds() * xm * 2.0f;
-	movement.y = 0;
 	
-	if ( keyboard.IsKeyPressed(AGE_KEY_SPACE) ) movement.y = 5 * (float)info.delta_time.Seconds();
-	if ( keyboard.IsKeyPressed(AGE_KEY_LEFT_SHIFT) ) movement.y = -5 * (float)info.delta_time.Seconds();
+	FVec3 forward = camera->GetForwardVector(); forward.y = 0;
+	velocity += forward * zm * movement_speed;
+	velocity += camera->GetRightVector()   * xm * movement_speed;
+	velocity.y += -9.8f * info.delta_time.Seconds();
 	
-	position += movement;
 	
-	camera->SetPosition(position + 2.0f);
+	// Mouse
+	is_mouse_down = mouse->IsButtonPressed(AGE_MOUSE_LEFT);
+	if ( is_mouse_down && !was_mouse_down ) {
+		was_mouse_down = true;
+	}
+	
+}
+void Player::Render(const age::UpdateInfo &info) {
+	Camera *camera = Game::Current()->GetDevice()->GetSceneManager()->GetCamera();
+	
+	camera->SetPosition(GetPosition() + FVec3(0, 1, 0));
+	camera->Update();
+	
+	Entity::Render(info);
 }
 
 

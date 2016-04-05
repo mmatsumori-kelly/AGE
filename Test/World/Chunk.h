@@ -12,7 +12,6 @@
 #include "AGE.h"
 #include "File.h"
 #include "Block.h"
-#include <AGE/Thread.h>
 
 namespace shootergame {
 	class Dimension;
@@ -47,6 +46,7 @@ namespace shootergame {
 		void Load();
 		
 	public:
+		~Chunk();
 		static Chunk* Open(Dimension *parent, const age::IVec2 &coords);
 		/** Saves the chunk */
 		void Save();
@@ -86,6 +86,8 @@ namespace shootergame {
 		inline Block* GetBlock(int x, int y, int z) {
 			return (x < 0 || x >= ChunkWidth || y < 0 || y >= ChunkHeight || z < 0 || z >= ChunkLength) ? nullptr : blocks[x][y][z];
 		}
+		/** Sets a block */
+		inline void SetBlock(int x, int y, int z, Block *block);
 		/** Checks if the given block is solid */
 		inline bool IsSolidBlock(int x, int y, int z) {
 			Block *block = GetBlock(x, y, z);

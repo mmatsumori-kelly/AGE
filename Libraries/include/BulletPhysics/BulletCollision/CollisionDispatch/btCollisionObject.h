@@ -16,7 +16,7 @@ subject to the following restrictions:
 #ifndef BT_COLLISION_OBJECT_H
 #define BT_COLLISION_OBJECT_H
 
-#include "LinearMath/btTransform.h"
+#include "BulletPhysics/LinearMath/btTransform.h"
 
 //island management, m_activationState1
 #define ACTIVE_TAG 1
@@ -28,18 +28,18 @@ subject to the following restrictions:
 struct	btBroadphaseProxy;
 class	btCollisionShape;
 struct btCollisionShapeData;
-#include "LinearMath/btMotionState.h"
-#include "LinearMath/btAlignedAllocator.h"
-#include "LinearMath/btAlignedObjectArray.h"
+#include "BulletPhysics/LinearMath/btMotionState.h"
+#include "BulletPhysics/LinearMath/btAlignedAllocator.h"
+#include "BulletPhysics/LinearMath/btAlignedObjectArray.h"
 
 typedef btAlignedObjectArray<class btCollisionObject*> btCollisionObjectArray;
 
 #ifdef BT_USE_DOUBLE_PRECISION
 #define btCollisionObjectData btCollisionObjectDoubleData
-#define btCollisionObjectDataName "btCollisionObjectDoubleData"
+#define btCollisionObjectDataName "BulletPhysics/btCollisionObjectDoubleData"
 #else
 #define btCollisionObjectData btCollisionObjectFloatData
-#define btCollisionObjectDataName "btCollisionObjectFloatData"
+#define btCollisionObjectDataName "BulletPhysics/btCollisionObjectFloatData"
 #endif
 
 

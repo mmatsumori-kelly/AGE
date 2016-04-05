@@ -62,6 +62,7 @@ namespace shootergame {
 		
 		
 		void Start();
+		static void Exit();
 		static void Update(const age::UpdateInfo &info);
 		static void Render(const age::UpdateInfo &info);
 		

@@ -10,6 +10,7 @@
 #define __AGE__Dimension__
 
 #include "Chunk.h"
+#include "Entity/Entity.h"
 #include <unordered_map>
 
 
@@ -28,11 +29,9 @@ namespace std {
 			seed ^= ah(p.first)  + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 			seed ^= bh(p.second) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 			return seed;
-//			return (p.first + p.second) * (p.first + p.second + 1) + 2 * p.second;
 		}
 	};
 }
-
 namespace shootergame {
 	class World;
 	
@@ -46,9 +45,11 @@ namespace shootergame {
 		age::File save_folder;
 		
 		age::video::ShaderProgram shader_program;
-		
 		std::unordered_map<IntPair, Chunk*, std::hash<IntPair>> loaded_chunks;
+		std::vector<Entity*> entities;
 		
+		
+		Entity *player;
 		
 		
 		Dimension(World *world, const std::string &name);
@@ -83,6 +84,17 @@ namespace shootergame {
 		inline age::video::ShaderProgram* GetShaderProgram() {
 			return &shader_program;
 		}
+		
+		
+		
+		/** Adds an entity */
+		void AddEntity(Entity *e);
+		/** Returns the player */
+		inline Entity* GetPlayer() const {
+			return player;
+		}
+		
+		
 		
 		
 		
@@ -126,7 +138,6 @@ namespace shootergame {
 			Block *b = GetBlockByCoord(x, y, z, load);
 			return (b == nullptr) ? false : b->IsSolid();
 		}
-		
 		
 		
 		virtual void Update(const age::UpdateInfo &info) override;

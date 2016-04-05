@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6132639B-CBB4-4FF7-A35D-C2BB02357119</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AGE</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0933A89E8A52BF5AF37C1E1C43384DE739DFF489</key>
+		<string>https://github.com/mmatsumori-kelly/AGE.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AGE.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0933A89E8A52BF5AF37C1E1C43384DE739DFF489</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mmatsumori-kelly/AGE.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0933A89E8A52BF5AF37C1E1C43384DE739DFF489</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0933A89E8A52BF5AF37C1E1C43384DE739DFF489</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AGE</string>
+		</dict>
+	</array>
+</dict>
+</plist>

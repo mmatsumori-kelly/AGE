@@ -14,7 +14,6 @@
 
 #include "Scene/SceneManager.h"
 #include "Scene/ActorNode.h"
-#include "Scene/FPSCamera.h"
 #include "Scene/ParentNode.h"
 
 #include "Video/Shader.h"

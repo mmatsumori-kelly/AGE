@@ -11,11 +11,11 @@ using namespace age::gui;
 AGEDevice::AGEDevice(Display *display) : display(display) {
 	fps = 0;
 	ups = 0;
-	locked_fps = 60;
+	locked_fps = -1;
 	locked_ups = 120;
 	
 	print_fps = true;
-	print_ups = true;
+	print_ups = false;
 	
 	running = false;
 	started = false;
@@ -61,9 +61,15 @@ void AGEDevice::Stop() {
 	if ( IsRunning() ) {
 		LogMessage("Stopping engine");
 		
+		
+		
 		// Get the update thread to stop too
 		running = false;
 		update_thread.Join();
+		
+		// Call the exit callback if it exists
+		if ( exit_callback != nullptr )
+			exit_callback();
 		
 		delete scene_manager;
 		delete display;
@@ -91,7 +97,7 @@ void AGEDevice::UpdateLoop() {
 		
 		UpdateInfo info;
 		info.device = this;
-		info.delta_time = render_timer.GetTime();
+		info.delta_time = update_timer.GetTime();
 		float requested_ups = locked_ups;
 		
 		

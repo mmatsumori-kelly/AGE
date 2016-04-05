@@ -10,7 +10,6 @@
 #include "Dimension.h"
 #include <AGE/Thread.h>
 
-
 using namespace age;
 using namespace age::scene;
 using namespace age::video;
@@ -21,6 +20,10 @@ using namespace shootergame;
 Chunk::Chunk(Dimension *dimension, const age::IVec2 &coords)
 : dimension(dimension), chunk_coords(coords), is_loading(true), loading_thread(nullptr) {
 	chunk_file = dimension->GetChunksFolder().GetChild(GetChunkString(coords.x, coords.y) + ".chk");
+}
+Chunk::~Chunk() {
+	for (int x = 0; x < ChunkWidth; ++x) for (int y = 0; y < ChunkHeight; ++y) for (int z = 0; z < ChunkLength; ++z)
+		delete blocks[x][y][z];
 }
 
 
@@ -58,14 +61,13 @@ Chunk* Chunk::Open(shootergame::Dimension *parent, const age::IVec2 &coords) {
 void Chunk::Generate() {
 	is_loading = true;
 	for (int y = 0; y < 20; ++y) for (int x = 0; x < ChunkWidth; ++x) for (int z = 0; z < ChunkLength; ++z) {
-		blocks[x][y][z] = new Block( (y < 19 ? 1 : 0), this, IVec3(x, y, z));
+		SetBlock(x, y, z, new Block( (y < 19 ? 1 : 0), this, IVec3(x, y, z)));
 	}
-	Save();
+//	Save();
 	is_loading = false;
 }
 void Chunk::Load() {
 	FileInputStream input_stream;
-	input_stream.Open(<#const age::File &file#>)
 }
 void Chunk::Save() {
 	
@@ -80,6 +82,13 @@ void Chunk::Save() {
 	}
 	else error << "Failed to open chunk stream for saving" << endline;
 	
+}
+
+
+
+void Chunk::SetBlock(int x, int y, int z, shootergame::Block *block) {
+	if ( blocks[x][y][z] != nullptr ) delete blocks[x][y][z];
+	blocks[x][y][z] = block;
 }
 
 

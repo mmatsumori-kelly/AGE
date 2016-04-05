@@ -16,12 +16,11 @@ namespace shootergame {
 	
 	
 	
-	class World : public age::scene::ParentNode {
+	class World {
 		age::File world_folder;
 		
-		Player *player;
 		Dimension *current_dimension;
-		
+		std::vector<Dimension*> loaded_dimensions;
 		
 		World(const age::File &world_folder);
 		
@@ -36,29 +35,28 @@ namespace shootergame {
 			return world_folder;
 		}
 		
-		/** Returns the player */
-		inline Player* GetPlayer() const {
-			return player;
-		}
 		
 		
 		
-		/** Returns the current dimension */
-		inline Dimension* GetCurrentDimension() const {
-			return current_dimension;
-		}
 		/** Loads the given dimension */
 		void ChangeDimension(const std::string &name);
 		/** Loads the given dimension */
 		Dimension* LoadDimension(const std::string &name);
+		/** Returns the current dimension */
+		inline Dimension* GetCurrentDimension() const {
+			return current_dimension;
+		}
 		/** Checks if the given dimension is loaded */
 		inline bool IsDimensionLoaded(const std::string &name) const {
-			return ContainsChild(name);
+			for (auto dim : loaded_dimensions)
+				if ( dim->GetName().compare(name) == 0 ) return true;
+			return false;
 		}
 		
 		
-		virtual void Update(const age::UpdateInfo &info) override;
-		virtual void Render(const age::UpdateInfo &info) override;
+		
+		void Update(const age::UpdateInfo &info);
+		void Render(const age::UpdateInfo &info);
 	};
 	
 	

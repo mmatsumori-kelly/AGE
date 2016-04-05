@@ -8,10 +8,15 @@
 
 #include "LuaScript.h"
 #include "../Vector.h"
+#include "../GUI/Display.h"
 #include <iostream>
+#include "../Scene/SceneManager.h"
+#include "../Scene/ActorNode.h"
 
 using namespace age;
 using namespace age::scripting;
+using namespace age::gui;
+using namespace age::scene;
 
 
 
@@ -33,6 +38,15 @@ void LuaState::OpenLibs(LuaState *state)
 	luaL_openlibs(state->state);
 	
 	state->GetGlobalNamespace()
+	
+	.beginClass<Duration>("Duration")
+	.addFunction("Seconds", &Duration::Seconds)
+	.endClass()
+	
+	.beginClass<UpdateInfo>("UpdateInfo")
+	.addData("delta_time", &UpdateInfo::delta_time)
+	.endClass()
+	
 	
 	// Vectors
 	.beginClass<FVec3>("FVec3")
@@ -59,6 +73,55 @@ void LuaState::OpenLibs(LuaState *state)
 	.endClass()
 	
 	
+	// Input
+	.beginClass<Keyboard>("Keyboard")
+	.addFunction("IsPressed", &Keyboard::IsKeyNamePressed)
+	.endClass()
+	
+	.beginClass<Mouse>("Mouse")
+	.addFunction("IsPressed", &Mouse::IsButtonPressed)
+	.addFunction("GetX", &Mouse::GetX)
+	.addFunction("GetY", &Mouse::GetY)
+	.addFunction("GetDX", &Mouse::GetDeltaX)
+	.addFunction("GetDY", &Mouse::GetDeltaY)
+	.endClass()
+	
+	.beginClass<Display>("Display")
+	.addFunction("GetMouse", &Display::GetMouse)
+	.addFunction("GetKeyboard", &Display::GetKeyboard)
+	.endClass()
+	
+	
+	// Scene
+	.beginClass<ActorNode>("ActorNode")
+	.addFunction("GetPosition", &ActorNode::GetPosition)
+	.addFunction("GetRotation", &ActorNode::GetRotation)
+	.addFunction("GetVelocity", &ActorNode::GetVelocity)
+	.addFunction("SetPosition", &ActorNode::SetPosition)
+	.addFunction("SetRotation", &ActorNode::SetRotation)
+	.addFunction("SetVelocity", &ActorNode::SetVelocity)
+	.endClass()
+	
+	.beginClass<Camera>("Camera")
+	.addFunction("SetPosition", &Camera::SetPosition)
+	.addFunction("SetRotation", &Camera::SetRotation)
+	.addFunction("Translate", &Camera::Move)
+	.addFunction("Rotate", &Camera::Rotate)
+	.addFunction("GetPosition", &Camera::GetPosition)
+	.addFunction("GetRotation", &Camera::GetRotation)
+	.addFunction("GetUpVector", &Camera::GetUpVector)
+	.addFunction("GetForwardVector", &Camera::GetForwardVector)
+	.addFunction("GetRightVector", &Camera::GetRightVector)
+	.endClass()
+	
+	
+	.beginClass<SceneManager>("SceneManager")
+	.addFunction("GetCamera", &SceneManager::GetCamera)
+	.endClass()
+	
+	
+	
+	// Scripting
 	.beginClass<LuaState>("LuaState")
 	.addConstructor<void(*)()>()
 	.addFunction("ExecFile", &LuaState::ExecFile)

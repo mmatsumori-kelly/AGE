@@ -18,6 +18,8 @@ using namespace age::scene;
 SceneManager::SceneManager(AGEDevice *device) : device(device), camera(nullptr) {
 	parent_node = new ParentNode();
 	parent_node->scene_manager = this;
+	
+	camera = new Camera(1.66f, 45.0f, 0.1f, 1000.0f);
 }
 SceneManager::~SceneManager() {
 	delete parent_node;

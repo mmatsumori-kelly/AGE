@@ -1,12 +1,12 @@
 //
-//  FPSCamera.cpp
+//  SceneCamera.cpp
 //  AGE
 //
 //  Created by Mitchell Matsumori-Kelly on 2/27/16.
 //  Copyright (c) 2016 Phoenix. All rights reserved.
 //
 
-#include "FPSCamera.h"
+#include "Camera.h"
 
 using namespace age;
 using namespace age::scene;
@@ -14,13 +14,13 @@ using namespace age::video;
 
 
 
-FPSCamera::FPSCamera(float aspect_ratio, float fov, float near_z, float far_z)
+Camera::Camera(float aspect_ratio, float fov, float near_z, float far_z)
 : position(0, 0, 0), rotation(0, 0, 0), aspect_ratio(aspect_ratio), fov(fov), near_z(near_z), far_z(far_z) {
 	CalculateMatrices();
 }
 
 
-void FPSCamera::NormalizeAngles() {
+void Camera::NormalizeAngles() {
 	rotation.x = fmodf(rotation.x, 360);
 	rotation.y = fmodf(rotation.y, 360);
 	rotation.z = fmodf(rotation.z, 360);
@@ -28,7 +28,7 @@ void FPSCamera::NormalizeAngles() {
 	if ( rotation.x > MAX_X_ROTATION ) rotation.x = MAX_X_ROTATION;
 	else if ( rotation.x < -MAX_X_ROTATION ) rotation.x = -MAX_X_ROTATION;
 }
-void FPSCamera::CalculateOrientation() {
+void Camera::CalculateOrientation() {
 	glm::mat4 orientation(1.0f);
 	
 	// Rotate the matrix
@@ -38,7 +38,7 @@ void FPSCamera::CalculateOrientation() {
 	// Set the orientation
 	this->orientation = orientation;
 }
-void FPSCamera::CalculateMatrices() {
+void Camera::CalculateMatrices() {
 	CalculateOrientation();
 	
 	view_matrix = orientation * MatrixTranslate(glm::mat4(), -position);
@@ -46,18 +46,15 @@ void FPSCamera::CalculateMatrices() {
 	vp_matrix = projection_matrix * view_matrix;
 }
 
-void FPSCamera::Update() {
+void Camera::Update() {
 	
 	NormalizeAngles();
 	CalculateMatrices();
 }
-void FPSCamera::UpdateProgram(ShaderProgram *program, const FMat4 &model_matrix) {
+void Camera::UpdateProgram(ShaderProgram *program, const FMat4 &model_matrix) {
 	program->SetMVPMatrix(vp_matrix * model_matrix);
 	program->SetViewMatrix(view_matrix);
 	program->SetModelMatrix(model_matrix);
 	program->SetCameraPosition(position);
 	program->SetUniform("sampler", 0);
 }
-
-
-
