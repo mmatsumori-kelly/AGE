@@ -9,6 +9,7 @@
 #include "Game.h"
 #include "World/TypeRegistry.h"
 #include "World/TextureAtlas.h"
+#include <AGE/Environment.h>
 
 using namespace age;
 using namespace age::video;
@@ -18,9 +19,10 @@ using namespace shootergame;
 
 
 
-Game Game::instance = Game();
+Game *Game::instance = nullptr;
 Game::Game() {
-	game_folder = File("/Users/mmatsumori-kelly17/Desktop/AGE/Game");
+	instance = this;
+	game_folder = Environment::Current()->GetUserFolder().GetChild("Desktop/AGE/Game");
 }
 Game::~Game() {
 	
@@ -49,7 +51,7 @@ void Game::Start() {
 		
 		
 		// Set up the world
-		world = World::New(File("/Users/mmatsumori-kelly17/Desktop/AGE/Game/Saves/World1"));
+		world = World::New(game_folder.GetChild("/Saves/World1"));
 		
 		
 		

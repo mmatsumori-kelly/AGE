@@ -91,8 +91,6 @@ SimpleModel* SimpleModel::Load(const age::File &file) {
 			
 			
 			// OpenGL VAO/VBO creation
-			
-			
 			GLuint vao, vbo;
 			glGenVertexArrays(1, &vao);
 			glBindVertexArray(vao);
@@ -101,6 +99,8 @@ SimpleModel* SimpleModel::Load(const age::File &file) {
 			glBindBuffer(GL_ARRAY_BUFFER, vbo);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(VertexInfo) * vertex_info.size(), (GLfloat*)&vertex_info[0], GL_STATIC_DRAW);
 			
+			
+			// Set up vertex attributes
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexInfo), (GLvoid*)0);
 			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexInfo), (GLvoid*)3);
 			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexInfo), (GLvoid*)5);
@@ -108,6 +108,7 @@ SimpleModel* SimpleModel::Load(const age::File &file) {
 			glEnableVertexAttribArray(1);
 			glEnableVertexAttribArray(2);
 			
+			// Unbind
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			glBindVertexArray(0);
 			

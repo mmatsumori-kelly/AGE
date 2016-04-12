@@ -70,16 +70,19 @@ namespace age {
 			static void UnbindProgram();
 			
 			
-			
+			/** Sets the model matrix uniform */
 			void SetModelMatrix(const FMat4 &model_matrix) {
 				SetUniform("M", model_matrix);
 			}
+			/** Sets the view matrix uniform */
 			void SetViewMatrix(const FMat4 &view_matrix) {
 				SetUniform("V", view_matrix);
 			}
+			/** Sets the model-view-projection matrix uniform */
 			void SetMVPMatrix(const FMat4 &mvp_matrix) {
 				SetUniform("MVP", mvp_matrix);
 			}
+			/** Sets the camera position uniform */
 			void SetCameraPosition(const FVec3 &position) {
 				SetUniform("camera_position", position);
 			}

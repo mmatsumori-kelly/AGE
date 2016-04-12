@@ -42,9 +42,9 @@ Chunk* Chunk::Open(shootergame::Dimension *parent, const age::IVec2 &coords) {
 	if ( !chunk_file.Exists() ) {
 		Chunk *chunk = new Chunk(parent, coords);
 		
-		chunk->Generate();
-//		chunk->loading_thread = new Thread();
-//		chunk->loading_thread->Start(GenerateChunk, chunk, false);
+		
+		chunk->loading_thread = new Thread();
+		chunk->loading_thread->Start(GenerateChunk, chunk, false);
 		
 		
 		return chunk;
@@ -62,7 +62,13 @@ void Chunk::Generate() {
 	is_loading = true;
 	for (int y = 0; y < 20; ++y) for (int x = 0; x < ChunkWidth; ++x) for (int z = 0; z < ChunkLength; ++z) {
 		SetBlock(x, y, z, new Block( (y < 19 ? 1 : 0), this, IVec3(x, y, z)));
+		
+		
+		if ( z == 0 || x % z  == 0 ) SetBlock(x, 20, z, new Block(0, this, IVec3(x, 20, z)));
 	}
+	
+	
+	
 //	Save();
 	is_loading = false;
 }
@@ -89,6 +95,7 @@ void Chunk::Save() {
 void Chunk::SetBlock(int x, int y, int z, shootergame::Block *block) {
 	if ( blocks[x][y][z] != nullptr ) delete blocks[x][y][z];
 	blocks[x][y][z] = block;
+	sector_requires_vao_update[y / SectorHeight] = true;
 }
 
 
@@ -119,8 +126,11 @@ void Chunk::Render(const age::UpdateInfo &info) {
 		
 		
 		for (int y = 0; y < NumSectors; ++y) {
+			if ( sector_models[y] == nullptr || sector_requires_vao_update[y] ) {
+				RegenerateSectorModel(y);
+				sector_requires_vao_update[y] = false;
+			}
 			
-			if ( sector_models[y] == nullptr ) RegenerateSectorModel(y);
 			sector_models[y]->Render();
 		}
 	}

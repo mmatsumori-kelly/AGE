@@ -51,7 +51,7 @@ namespace age {
 				ReportErrors(state, err);
 				return err != 0;
 			}
-			
+			/** Code execution operator */
 			inline bool operator() (const std::string &code) {
 				return ExecString(code);
 			}
@@ -81,15 +81,17 @@ namespace age {
 			}
 			
 			
+			/** Safely calls a Lua function */
 			template <typename... Args>
 			inline void SafeCall(const luabridge::LuaRef &ref, const Args&... args) {
 				if ( !ref.isNil() ) ref(args...);
 			}
+			/** Safely calls a Lua function with no parameters */
 			inline void SafeCall(luabridge::LuaRef &ref) {
 				if ( !ref.isNil() ) ref();
 			}
 			
-			
+			/** Casts to a lua_State pointer */
 			inline operator lua_State*() {
 				return state;
 			}

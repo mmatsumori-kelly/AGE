@@ -32,9 +32,11 @@ CollisionShape::~CollisionShape() {
 RigidBody::RigidBody(CollisionShape *shape, float mass) {
 	btDefaultMotionState *motion_state = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 	
+	// Calculate local inertia
 	btVector3 local_inertia(0, 0, 0);
 	shape->GetInternalShape()->calculateLocalInertia(mass, local_inertia);
 	
+	// Create and return rigidbody
 	btRigidBody::btRigidBodyConstructionInfo rbci(mass, motion_state, shape->GetInternalShape(), local_inertia);
 	rigidbody = new btRigidBody(rbci);
 }

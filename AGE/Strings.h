@@ -137,9 +137,11 @@ namespace age {
 		std::string copy = str;
 		size_t find_loc;
 		
+		// Loop through the characters
 		for (auto it = find_replace.begin(); it != find_replace.end(); ++it) {
 			size_t f_len = (*it).first.length();
 			
+			// Replace each character
 			while ( (find_loc = copy.find((*it).first) != std::string::npos) ) {
 				copy.replace(find_loc - 1, f_len, (*it).second);
 			}

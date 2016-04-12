@@ -25,8 +25,9 @@ namespace shootergame {
 	};
 	
 	
-	template <TextureAtlasType T>
-	class TextureAtlas {
+	
+	/** A texture atlas for rendering spritesheets */
+	template <TextureAtlasType T> class TextureAtlas {
 		static age::video::Texture *texture;
 		static int tile_size;
 		
@@ -45,10 +46,11 @@ namespace shootergame {
 		}
 		
 		
-		
+		/** Sets the tile size of this atlas */
 		static void SetTileSize(int tile_size) {
 			TextureAtlas::tile_size = tile_size;
 		}
+		/** Returns texture coordinates */
 		static age::FVec2 GetTextureCoords(float tile_x, float tile_y) {
 			if ( tile_x < 0 ) tile_x = 0;
 			if ( tile_y < 0 ) tile_y = 0;
@@ -56,8 +58,6 @@ namespace shootergame {
 			if ( tile_y * tile_size > texture->GetHeight() ) tile_y = texture->GetHeight() / tile_size;
 			return age::FVec2((float)tile_x * tile_size / texture->GetWidth(), (float)tile_y * tile_size / texture->GetHeight());
 		}
-		
-		
 	};
 	template <TextureAtlasType T> age::video::Texture* TextureAtlas<T>::texture = nullptr;
 	template <TextureAtlasType T> int TextureAtlas<T>::tile_size = 0;

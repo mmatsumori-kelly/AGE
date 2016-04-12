@@ -20,10 +20,12 @@ namespace age {
 	};
 	
 	
+	// Interface for updatable classes
 	class Updatable {
 	public:
 		virtual void Update(const UpdateInfo &info) { }
 	};
+	// Interface for renderable classes
 	class Renderable {
 	public:
 		virtual void Render(const UpdateInfo &info) { }

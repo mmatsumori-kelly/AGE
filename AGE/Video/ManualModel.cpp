@@ -41,7 +41,7 @@ bool ManualModel::Create() {
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_TRUE,  sizeof(VertexInfo), (GLfloat*)0 + 5);
 		
 		
-		
+		// Unbind
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 		
@@ -53,6 +53,8 @@ bool ManualModel::Create() {
 void ManualModel::Destroy() {
 	vertex_data.clear();
 	
+	
+	// Delete if already created
 	if ( created ) {
 		glDeleteVertexArrays(1, &vao);
 		glDeleteBuffers(1, &vbo);

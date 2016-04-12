@@ -14,7 +14,7 @@
 
 namespace age {
 	
-	
+	// Vector typedefs
 	typedef glm::ivec2 IVec2;
 	typedef glm::fvec2 FVec2;
 	typedef glm::dvec2 DVec2;
@@ -26,6 +26,7 @@ namespace age {
 	typedef glm::dvec4 DVec4;
 	
 	
+	// Angle unit conversions
 	inline float ToRadians(float degrees) {
 		return glm::radians(degrees);
 	}
@@ -33,10 +34,18 @@ namespace age {
 		return glm::degrees(radians);
 	}
 	
+	/** Calculates the length of a vector */
+	template <typename Vec>
+	inline float VectorLength(const Vec &vec) {
+		return glm::length(vec);
+	}
 	
+	
+	/** Normalizes a vector. A zero vector returns a zero vector */
 	template <typename Vec>
 	inline Vec VectorNormalize(const Vec &vec) {
-		return glm::normalize(vec);
+		if ( VectorLength(vec) == 0 ) return vec;
+		else return glm::normalize(vec);
 	}
 	
 }

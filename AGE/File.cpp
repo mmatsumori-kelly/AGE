@@ -21,6 +21,7 @@ File::File() : path(Environment::Current()->GetUserFolder().GetPath()) {
 File::File(const std::string &path) {
 	const size_t strlen = path.length();
 	
+	// Some string manipulation
 	if ( StringEndsWith(path, '/') ) this->path = (strlen == 1) ? path : path.substr(0, strlen - 1);
 	else if ( strlen == 0 ) this->path = Environment::Current()->GetUserFolder().GetPath();
 	else this->path = path;
@@ -53,7 +54,7 @@ bool File::WriteText(const std::string &text, bool append) const {
 		std::ofstream ofs;
 		ofs.open(path, append ? (std::ofstream::out | std::ofstream::app) : std::ofstream::out);
 		
-		
+		// If it's good, write to it
 		if ( ofs.good() ) {
 			ofs << text;
 			ofs.close();
@@ -66,16 +67,18 @@ bool File::WriteText(const std::string &text, bool append) const {
 std::string File::ReadText(bool *fail_check) const {
 	if ( fail_check != nullptr ) *fail_check = true;
 	
-	
+	// If it's a directory we've failed
 	if ( IsDirectory() ) {
 		if ( fail_check != nullptr ) *fail_check = false;
 		return "";
 	}
 	else {
 		
+		// Open the file
 		std::ifstream ifs;
 		ifs.open(path);
 		
+		// Check if it's good
 		if ( ifs.good() ) {
 			std::string text;
 			
@@ -100,46 +103,46 @@ std::string File::ReadText(bool *fail_check) const {
 	}
 }
 std::vector<std::string> File::ReadLines()   const {
-	if ( IsDirectory() || !Exists() ) {
-		return {};
-	}
-	else {
-		return StringSplitByChar(ReadText(), '\n');
-	}
+	// If it's a directory or doesn't exist, return nothing
+	if ( IsDirectory() || !Exists() ) return {};
+	// Read the file and split it by newline characters
+	else return StringSplitByChar(ReadText(), '\n');
 }
 
 
 std::vector<File> File::GetChildren() const {
-	
 	std::vector<File> out;
 	
 	if ( Exists() ) {
-		
 		DIR *dir;
 		class dirent *ent;
 		class stat st;
 		
+		// Open the directory
 		dir = opendir(GetPath().c_str());
+		
+		// Loop through its contents
 		while ((ent = readdir(dir)) != NULL) {
 			const std::string file_name = ent->d_name;
 			const std::string full_file_name = GetPath() + "/" + file_name;
 			
-			if (file_name[0] == '.')
-				continue;
 			
-			if (stat(full_file_name.c_str(), &st) == -1)
-				continue;
+			// This directory
+			if ( file_name[0] == '.' ) continue;
+			// Failure
+			if (stat(full_file_name.c_str(), &st) == -1) continue;
+			// Directory
+			if ( (st.st_mode & S_IFDIR) != 0 ) continue;
 			
-			const bool is_directory = (st.st_mode & S_IFDIR) != 0;
-			
-			if (is_directory)
-				continue;
-			
+			// Add the file name
 			out.push_back(full_file_name);
 		}
+		
+		// Close the directory
 		closedir(dir);
 	}
 	
+	// Return the files
 	return out;
 }
 

@@ -20,6 +20,7 @@ namespace age {
 		
 		
 		
+		/** Collision shape for rigidbody */
 		class CollisionShape {
 			btCollisionShape *collision_shape;
 			
@@ -38,7 +39,7 @@ namespace age {
 		};
 		
 		
-		
+		/** Rigidbody for physics */
 		class RigidBody {
 			btRigidBody *rigidbody;
 			
@@ -49,12 +50,15 @@ namespace age {
 			RigidBody(CollisionShape *shape, float mass);
 			
 			
+			/** Sets whether the body is static */
 			void SetStatic(bool st);
+			/** Sets whether the body is active */
 			void SetActive(bool active);
-			
+			/** Sets the position of the body */
 			void SetPosition(const FVec3 &pos);
 			
 			
+			/** returns the internal rigidbody */
 			inline btRigidBody* GetInternalRigidBody() const {
 				return rigidbody;
 			}

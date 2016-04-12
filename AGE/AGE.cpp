@@ -9,6 +9,8 @@ using namespace age::gui;
 
 
 AGEDevice::AGEDevice(Display *display) : display(display) {
+	
+	// Initialize engine variables
 	fps = 0;
 	ups = 0;
 	locked_fps = -1;
@@ -26,15 +28,18 @@ AGEDevice::AGEDevice(Display *display) : display(display) {
 
 
 AGEDevice* AGEDevice::New() {
+	
+	// Create new display
 	Display *display = Display::New();
 	if ( display == nullptr ) {
 		error << "Could not create AGE device" << endline;
 		return nullptr;
 	}
 	else {
+		
+		// Make display current and return it
 		display->MakeCurrent();
 		AGEDevice *device = new AGEDevice(display);
-		
 		
 		return device;
 	}

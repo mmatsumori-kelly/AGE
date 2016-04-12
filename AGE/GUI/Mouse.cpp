@@ -25,6 +25,7 @@ void Mouse::Update() {
 	
 	glfwGetCursorPos((GLFWwindow*)display->GetWindowHandle(), &x, &y);
 	
+	// If it's the first update, the old mouse position must equal the new mouse position
 	if ( first_update ) {
 		old_x = x;
 		old_y = y;

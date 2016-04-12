@@ -13,6 +13,9 @@
 
 namespace age {
 	namespace gui {
+		
+		
+		// Keyboard enum
 		enum Key {
 			AGE_KEY_UNKNOWN = -1,
 			
@@ -80,8 +83,6 @@ namespace age {
 			AGE_KEY_F11,
 			AGE_KEY_F12,
 			
-			
-			
 			AGE_KEY_ESCAPE = 256,
 			AGE_KEY_ENTER = 257,
 			AGE_KEY_TAB = 258,
@@ -106,6 +107,8 @@ namespace age {
 		
 		class Display;
 		
+		
+		
 		/** Keyboard class */
 		class Keyboard {
 			Display *display;
@@ -114,9 +117,11 @@ namespace age {
 			Keyboard(Display *display);
 			
 			
-			
+			/** Checks if a key was pressed using the Key enum */
 			bool IsKeyPressed(Key key);
+			/** Checks if a key was pressed using the Key char */
 			bool IsKeyCharPressed(char key);
+			/** Checks if a key was pressed using the Key's name */
 			bool IsKeyNamePressed(const std::string &name);
 		};
 		
@@ -125,6 +130,8 @@ namespace age {
 		/** Converts a key to a character */
 		char KeyToChar(Key k);
 	}
+	
+	
 }
 
 #endif /* defined(__AGE__Keyboard__) */

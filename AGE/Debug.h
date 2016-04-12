@@ -25,10 +25,10 @@ namespace age {
 	template <typename ...Args> inline void LogWithType(const std::string &type, const std::string &message, const Args&... args) {
 		static bool locked = false;
 		
-		
+		// To prevent threads from printing at the same time. Terrible for all threads performance-wise
 		while ( locked ) continue;
-		
 		locked = true;
+		
 		
 		printf("%s", type.c_str());
 		printf("%s", GetFormattedTime("[%D %X]: ").c_str());
@@ -54,22 +54,24 @@ namespace age {
 	
 	
 	/** Crashes the program if the condition is false, and prints the error message */
-	inline void Assert(bool condition, const std::string &error_message) {
-		if ( !condition ) {
-			LogError("Assertion Failed: %s", error_message.c_str());
-			exit(1);
-		}
-	}
+//	inline void Assert(bool condition, const std::string &error_message) {
+//		if ( !condition ) {
+//			LogError("Assertion Failed: %s", error_message.c_str());
+//			exit(1);
+//		}
+//	}
 	
 	
 	
-	
+	/** Prints out all OpenGL errors */
 	void PrintOpenGLErrors();
 	
 	
+	// Endline character for printing messages
 	const char endline = '\n';
 	
 	
+	/* Second message for printing */
 	static struct SecondMessage {
 		
 	public:
@@ -82,6 +84,7 @@ namespace age {
 		
 	} second_message;
 	
+	/** First message for printing */
 	static struct FirstMessage {
 		std::string type_str;
 		
@@ -89,6 +92,7 @@ namespace age {
 		FirstMessage(const std::string &type_str) : type_str(type_str) { }
 		
 		
+		/** Operators for output stream. Returns second message */
 		template <typename T>
 		inline SecondMessage& operator <<(const T &t) {
 			std::cout << type_str << GetFormattedTime("[%D %X]: ") << t;
@@ -103,7 +107,7 @@ namespace age {
 			return second_message;
 		}
 		
-	} message("MESSAGE"), error("ERROR  ");
+	} message("MESSAGE"), error("ERROR  "), warning ("WARNING");
 	
 	
 }

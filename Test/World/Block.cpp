@@ -44,6 +44,10 @@ int Block::GetAbsoluteZ() {
 	return chunk->GetCoords().y * ChunkLength + GetZ();
 }
 
+void Block::RemoveSelf() {
+	chunk->SetBlock(position.x, position.y, position.z, nullptr);
+}
+
 
 void Block::AddRenderData(ManualModel *model) {
 	state->GetGlobal("AddVertexData")(this, model);

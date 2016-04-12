@@ -37,8 +37,6 @@ namespace age {
 			}
 			
 			
-			/** returns the texture id */
-			
 			
 			/** Binds this texture */
 			void BindTexture();

@@ -22,8 +22,11 @@ void Thread::Join()             {
 }
 void Thread::Start(void (*function)(void*), void *user_ptr, bool wait_for_thread_start) {
 	if ( thread == nullptr ) {
+		// Create important things
 		current_function = new RunnableFunction<void, void*>(function);
 		thread = new std::thread(Thread::RunThread, this, user_ptr);
+		
+		// If a wait is requested just loop till the thread starts
 		if ( wait_for_thread_start ) {
 			while ( !IsRunning() );
 		}

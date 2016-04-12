@@ -24,13 +24,15 @@ namespace age {
 			static GLFW instance;
 			bool init;
 			
+			// Private constructor and destructor
 			GLFW();
 			~GLFW();
 			
 		public:
 			
-			
+			/** Initializes GLFW */
 			static void Init();
+			/** Checks if GLFW was initialized */
 			static inline bool IsInit() {
 				return instance.init;
 			}

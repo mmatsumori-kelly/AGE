@@ -13,7 +13,7 @@ namespace age {
 	namespace gui {
 		class Display;
 		
-		
+		// Mouse enum
 		enum MouseButton {
 			AGE_MOUSE_LEFT,
 			AGE_MOUSE_MIDDLE,
@@ -21,6 +21,7 @@ namespace age {
 		};
 		
 		
+		/** Mouse input */
 		class Mouse {
 			double x, y;
 			double old_x, old_y;
@@ -30,27 +31,29 @@ namespace age {
 		public:
 			Mouse(Display *display) : display(display), x(0), y(0), old_x(0), old_y(0)  { }
 			
-			
+			/** Returns the delta x movement of the mouse */
 			inline double GetDeltaX() {
 				return x - old_x;
 			}
+			/** Returns the delta y movement of the mouse */
 			inline double GetDeltaY() {
 				return y - old_y;
 			}
+			/** Returns the x position of the mouse */
 			inline double GetX() {
 				return x;
 			}
+			/** Returns the y position of the mouse */
 			inline double GetY() {
 				return y;
 			}
 			
-			
+			/** Checks if a mouse button is pressed */
 			bool IsButtonPressed(MouseButton button);
 			
 			
-			
+			/** Updates the mouse */
 			void Update();
-			
 		};
 		
 		

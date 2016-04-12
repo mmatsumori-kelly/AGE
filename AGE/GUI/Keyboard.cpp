@@ -43,9 +43,13 @@ bool Keyboard::IsKeyNamePressed(const std::string &name_) {
 
 
 Key gui::CharToKey(char c) {
+	
+	// Range shortcuts
 	if      ( c >= 'A' && c <= 'Z' ) return Key(AGE_KEY_A + (c - 'A'));
 	else if ( c >= 'a' && c <= 'z' ) return Key(AGE_KEY_A + (c - 'a'));
 	else if ( c >= '0' && c <= '0' ) return Key(AGE_KEY_0 + (c - '0'));
+	
+	// Some other characters
 	else switch ( c ) {
 		case ' ': return AGE_KEY_SPACE;
 		case '\t': return AGE_KEY_TAB;
@@ -63,8 +67,12 @@ Key gui::CharToKey(char c) {
 	}
 }
 char gui::KeyToChar(Key k) {
+	
+	// Range shortcuts
 	if      ( k >= AGE_KEY_A && k <= AGE_KEY_Z ) return (char)(k - AGE_KEY_A) + 'A';
 	else if ( k >= AGE_KEY_0 && k <= AGE_KEY_0 ) return (char)(k - AGE_KEY_0) + '0';
+	
+	// Some other keys
 	else switch ( k ) {
 		case AGE_KEY_SPACE : return ' ';
 		case AGE_KEY_TAB : return '\t';

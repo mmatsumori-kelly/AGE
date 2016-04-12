@@ -18,7 +18,7 @@ namespace shootergame {
 	
 	
 	class Game {
-		static Game instance;
+		static Game *instance;
 		age::AGEDevice *device;
 		
 		World* world;
@@ -32,7 +32,7 @@ namespace shootergame {
 		
 		
 		static inline Game* Current() {
-			return &instance;
+			return instance;
 		}
 		inline age::AGEDevice* GetDevice() {
 			return device;
@@ -60,10 +60,13 @@ namespace shootergame {
 		}
 		
 		
-		
+		/** Starts the game */
 		void Start();
+		/** Called upon exit of the game. Don't touch! */
 		static void Exit();
+		/** Updates the game */
 		static void Update(const age::UpdateInfo &info);
+		/** Draws the game */
 		static void Render(const age::UpdateInfo &info);
 		
 	};

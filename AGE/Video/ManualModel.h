@@ -28,15 +28,14 @@ namespace age {
 			virtual ~ManualModel();
 			
 			
+			/** Reserves some data in memory */
 			inline void ReserveData(long count) {
 				vertex_data.reserve(count);
 			}
+			/** Add vertex info */
 			inline void AddVertexData(const VertexInfo &info) {
 				vertex_data.push_back(info);
 			}
-//			inline void AddVertexData(const FVec3 &vertex, const FVec3 &normal, const FVec2 &uv) {
-//				vertex_data.push_back(VertexInfo(vertex, normal, uv));
-//			}
 			
 			/** Create the VAO */
 			bool Create();
@@ -48,6 +47,7 @@ namespace age {
 			}
 			
 			
+			/** Return vertex info */
 			virtual inline std::vector<VertexInfo>& GetVertexInfo() override {
 				return vertex_data;
 			}

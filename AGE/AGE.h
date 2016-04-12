@@ -24,7 +24,7 @@
 namespace age {
 	class AGEDevice;
 	
-	
+	// Callback typedefs
 	typedef void (*InitCallback)(void);
 	typedef void (*ExitCallback)(void);
 	typedef void (*UpdateCallback)(const UpdateInfo &info);
@@ -32,6 +32,7 @@ namespace age {
 	
 	
 	
+	/** The game engine */
 	class AGEDevice {
 		// Important classes
 		scene::SceneManager *scene_manager;

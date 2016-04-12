@@ -97,7 +97,7 @@ namespace age {
 	
 	
 	
-	
+	/** A file output stream, modeled after Java's DataOutputStream class */
 	class FileOutputStream {
 		typedef char byte;
 		
@@ -105,27 +105,36 @@ namespace age {
 		bool open;
 		
 		
+		/** Writes an array */
 		template <typename T> inline void WriteArray(const T *t, long size) {
-			Write(size);
+			WriteLong(size); // Write the size of the array
 			output_stream.write((char*)t, sizeof(T) * size);
+		}
+		/** Writes an array */
+		template <typename T> inline void WriteArray(const std::vector<T> &t) {
+			Write(t.size()); // Write the size of the array
+			output_stream.write((char*)&t[0], sizeof(T) * t.size());
 		}
 		
 	public:
 		FileOutputStream() : open(false) { }
 		
-		
+		/** Writes an object type */
 		template <typename T> inline void Write(const T &t) {
 			output_stream.write((char*)&t, sizeof(T));
 		}
 		
+		/** Checks if the stream is open */
 		inline bool IsOpen() const {
 			return open;
 		}
+		/** Opens the stream for writing */
 		bool Open(const File &file) {
 			if ( open ) return false;
 			output_stream.open(file.GetPath(), std::ios::binary | std::ios::out);
 			return (open = output_stream.good());
 		}
+		/** Closes the stream */
 		void Close() {
 			if ( open ) {
 				output_stream.close();
@@ -135,27 +144,35 @@ namespace age {
 		
 		
 		
+		/** Writes a byte of information */
 		void WriteByte(byte x) {
 			Write(x);
 		}
+		/** Writes a character */
 		void WriteChar(char x) {
 			Write(x);
 		}
+		/** Writes a short */
 		void WriteShort(short x) {
 			Write(x);
 		}
+		/** Writes an int */
 		void WriteInt(int x) {
 			Write(x);
 		}
+		/** Writes a long */
 		void WriteLong(long x) {
 			Write(x);
 		}
+		/** Writes a float */
 		void WriteFloat(float x) {
 			Write(x);
 		}
+		/** Writes a double */
 		void WriteDouble(double x) {
 			Write(x);
 		}
+		/** Writes a string */
 		void WriteString(const std::string &string) {
 			WriteArray(string.c_str(), string.size());
 			WriteChar('\0');
@@ -164,6 +181,7 @@ namespace age {
 	
 	
 	
+	/** A file input stream, modeled after Java's DataInputStream class */
 	class FileInputStream {
 		typedef char byte;
 		
@@ -171,15 +189,29 @@ namespace age {
 		bool open;
 		
 		
+		template <typename T> T* ReadArray(long *length_out) {
+			// Determine the length of the array and its size
+			*length_out = ReadLong();
+			long num_bytes = sizeof(T) * (*length_out);
+			
+			// Read the array
+			char *read = new char[num_bytes];
+			input_stream.read((char*)read, num_bytes);
+			
+			// Return the array
+			return (T*)read;
+		}
 		
 		
 		
 	public:
 		FileInputStream() : open(false) { }
 		
+		/** Checks if this stream is open */
 		inline bool IsOpen() const {
 			return open;
 		}
+		/** Opens the stream for reading */
 		bool Open(const File &file) {
 			if ( open ) return false;
 			else {
@@ -187,6 +219,7 @@ namespace age {
 				return (open = input_stream.good());
 			}
 		}
+		/** Closes the stream */
 		void Close() {
 			if ( open ) {
 				input_stream.close();
@@ -195,43 +228,56 @@ namespace age {
 		}
 		
 		
+		/** Reads an object type */
 		template <typename T> T& Read(T *t_out) {
+			// Allocate memory for the object
 			char read[sizeof(T)];
+			
+			// Read the object
 			input_stream.read((char*)read, sizeof(T));
+			
+			// Return some stuff
 			*t_out = *(T*)read;
 			return *t_out;
 		}
 		
 		
-		
+		/** Reads a byte of information */
 		byte ReadByte() {
 			byte b;
 			return Read<byte>(&b);
 		}
+		/** Reads a character */
 		char ReadChar() {
 			char c;
 			return Read<byte>(&c);
 		}
+		/** Reads a short */
 		short ReadShort() {
 			short s;
 			return Read<short>(&s);
 		}
+		/** Reads an int */
 		int ReadInt() {
 			int i;
 			return Read<int>(&i);
 		}
+		/** Reads a long */
 		long ReadLong() {
 			long l;
 			return Read<long>(&l);
 		}
+		/** Reads a float */
 		float ReadFloat() {
 			float f;
 			return Read<float>(&f);
 		}
+		/** Reads a double */
 		double ReadDouble() {
 			double d;
 			return Read<double>(&d);
 		}
+		/** Reads a string */
 		std::string ReadString() {
 			std::vector<char> chars;
 			chars.reserve(64);

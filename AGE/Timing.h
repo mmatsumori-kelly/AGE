@@ -55,7 +55,7 @@ namespace age {
 		}
 		
 		
-		/* operators */
+		/* Operators */
 		inline HighPrecisionDuration operator +(const HighPrecisionDuration &other) const {
 			return nanoseconds + other.nanoseconds;
 		}

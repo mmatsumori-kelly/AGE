@@ -26,8 +26,10 @@ namespace shootergame {
 		Dimension *dimension;
 		age::File chunk_file;
 		
+		
 		Block *blocks[ChunkWidth][ChunkHeight][ChunkLength] = { nullptr };
 		age::video::ManualModel *sector_models[NumSectors]  = { nullptr };
+		bool sector_requires_vao_update[NumSectors] = { false };
 		
 		
 		bool is_loading; // Is the chunk currently loading?

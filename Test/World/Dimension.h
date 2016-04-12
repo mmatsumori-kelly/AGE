@@ -50,6 +50,7 @@ namespace shootergame {
 		
 		
 		Entity *player;
+		age::FVec3 gravity;
 		
 		
 		Dimension(World *world, const std::string &name);
@@ -85,6 +86,10 @@ namespace shootergame {
 			return &shader_program;
 		}
 		
+		
+		inline const age::FVec3& GetGravity() const {
+			return gravity;
+		}
 		
 		
 		/** Adds an entity */

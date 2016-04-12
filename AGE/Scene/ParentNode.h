@@ -41,24 +41,29 @@ namespace age {
 					node->parent = this;
 				}
 			}
+			/** Removes a child */
 			virtual void RemoveChild(const std::string &name) {
 				children.erase(name);
 			}
+			/** Checks if this parent node contains a child */
 			inline bool ContainsChild(const std::string &name) const {
 				return children.count(name) != 0;
 			}
+			/** Returns a child by name */
 			inline ISceneNode* GetChild(const std::string &name) {
 				return children[name];
 			}
 			
-			
+			/** Returns the scene manager */
 			inline SceneManager* GetSceneManager() {
 				if ( parent != nullptr ) return parent->GetSceneManager();
 				return scene_manager;
 			}
 			
 			
+			/** Updates this parent node and its children */
 			virtual void Update(const UpdateInfo &info) override;
+			/** Renders this parent node and its children */
 			virtual void Render(const UpdateInfo &info) override;
 		};
 		

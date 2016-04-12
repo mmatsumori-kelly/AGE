@@ -26,7 +26,7 @@ namespace age {
 		
 		
 		
-		
+		/** A world for physics */
 		class PhysicsWorld {
 			btBroadphaseInterface *broadphase;
 			btDefaultCollisionConfiguration *collision_config;

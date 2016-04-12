@@ -41,7 +41,6 @@ namespace shootergame {
 		inline Chunk* GetChunk() {
 			return chunk;
 		}
-		
 		/** Returns the hitbox */
 		inline const AABBHitbox& GetHitbox() const {
 			return hitbox;
@@ -67,6 +66,10 @@ namespace shootergame {
 		}
 		int GetAbsoluteX();
 		int GetAbsoluteZ();
+		
+		
+		/** Removes this block from the chunk */
+		void RemoveSelf();
 		
 		
 		/** Checks if the block is solid */

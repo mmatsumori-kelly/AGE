@@ -21,10 +21,12 @@ Camera::Camera(float aspect_ratio, float fov, float near_z, float far_z)
 
 
 void Camera::NormalizeAngles() {
+	// Normalize rotation
 	rotation.x = fmodf(rotation.x, 360);
 	rotation.y = fmodf(rotation.y, 360);
 	rotation.z = fmodf(rotation.z, 360);
 	
+	// Make sure the rotation doesn't go over or under the max rotation
 	if ( rotation.x > MAX_X_ROTATION ) rotation.x = MAX_X_ROTATION;
 	else if ( rotation.x < -MAX_X_ROTATION ) rotation.x = -MAX_X_ROTATION;
 }
@@ -41,6 +43,7 @@ void Camera::CalculateOrientation() {
 void Camera::CalculateMatrices() {
 	CalculateOrientation();
 	
+	// Calculate matrices
 	view_matrix = orientation * MatrixTranslate(glm::mat4(), -position);
 	projection_matrix = glm::perspective(45.0f, aspect_ratio, near_z, far_z);
 	vp_matrix = projection_matrix * view_matrix;

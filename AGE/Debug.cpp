@@ -12,16 +12,20 @@
 #include <OpenGL/glu.h>
 
 
+
 std::string age::GetFormattedTime(const std::string &format) {
-	const int buffer_size = 256;
+	const int buffer_size = 512;
 	
+	
+	// Find the local time
 	time_t ctime;
-	struct tm *time_info;
+	time(&ctime);
+	
+	// Create a buffer for the time string
+	struct tm *time_info = localtime(&ctime);
 	char buffer[buffer_size];
 	
-	time(&ctime);
-	time_info = localtime(&ctime);
-	
+	// Format the string
 	strftime(buffer, buffer_size, format.c_str(), time_info);
 	
 	return buffer;
@@ -33,9 +37,12 @@ std::string age::GetFormattedTime(const std::string &format) {
 
 void age::PrintOpenGLErrors() {
 	GLuint error = glGetError();
+	
+	// No error, so notify that there were none
 	if ( error == GL_NO_ERROR ) {
 		LogError("OpenGL Error: no error");
 	}
+	// Loop through all the errors
 	else {
 		do {
 			LogError("OpenGL Error: %s", gluErrorString(error));

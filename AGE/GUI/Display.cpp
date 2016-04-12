@@ -50,11 +50,13 @@ Display* Display::New() {
 		
 		glClearColor(1, 0, 1, 1);
 		
+		
+		// Depth testing
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 		glClearDepth(1.0f);
 		
-		
+		// Face culling
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glFrontFace(GL_CCW);

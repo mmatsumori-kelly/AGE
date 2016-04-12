@@ -17,6 +17,7 @@ namespace age {
 		class ParentNode;
 		
 		
+		/** A scene node */
 		class ISceneNode : public IRefCounted {
 			friend class ParentNode;
 			

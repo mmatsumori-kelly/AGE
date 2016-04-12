@@ -40,7 +40,7 @@ namespace age {
 			return user_name;
 		}
 		/** Returns the user's folder */
-		const inline File &GetUserFolder() const {
+		inline const File &GetUserFolder() const {
 			return user_folder;
 		}
 		

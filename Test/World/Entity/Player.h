@@ -18,12 +18,15 @@ namespace shootergame {
 	
 	class Player : public Entity {
 		float movement_speed;
-		bool is_mouse_down, was_mouse_down;
+		bool is_mouse_down [3] = {false};
+		bool was_mouse_down[3] = {false};
+		
+		Block *selected_block;
 		
 		
 		
-		void MouseDown();
-		void MouseUp();
+		void MouseDown(int button);
+		void MouseUp(int button);
 		
 	public:
 		Player(Dimension *dimension);

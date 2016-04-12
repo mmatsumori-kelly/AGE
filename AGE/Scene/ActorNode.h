@@ -36,38 +36,48 @@ namespace age {
 			ActorNode();
 			~ActorNode();
 			
-			
+			/** Sets the position of the actor */
 			void SetPosition(const FVec3 &position) {
 				this->position = position;
 			}
+			/** Sets the rotation of the actor */
 			void SetRotation(const FVec3 &rotation) {
 				this->rotation = rotation;
 			}
+			/** Sets the velocity of the actor */
 			void SetVelocity(const FVec3 &velocity) {
 				this->velocity = velocity;
 			}
+			/** Returns the position of the actor */
 			FVec3 GetPosition() const {
 				return position;
 			}
+			/** Returns the rotation of the actor */
 			FVec3 GetRotation() const {
 				return rotation;
 			}
+			/** Returns the velocity of the actor */
 			FVec3 GetVelocity() const {
 				return velocity;
 			}
 			
+			/** Sets the actor's model */
 			void SetModel(video::IModel *model) {
 				this->model = model;
 			}
+			/** Sets the actor's shader */
 			void SetShaderProgram(video::ShaderProgram *program) {
 				shader = program;
 			}
+			/** Sets the actor's texture */
 			void SetTexture(video::Texture *texture) {
 				this->texture = texture;
 			}
 			
 			
+			/** Updates this actor */
 			virtual void Update(const UpdateInfo &info) override;
+			/** Renders this actor */
 			virtual void Render(const UpdateInfo &info) override;
 		};
 		

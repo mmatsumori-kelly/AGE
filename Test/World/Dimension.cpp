@@ -22,7 +22,8 @@ using namespace shootergame;
 
 
 
-Dimension::Dimension(World *world, const std::string &name) : world(world), name(name), shader_program() {
+Dimension::Dimension(World *world, const std::string &name)
+: world(world), name(name), shader_program(), gravity(0, -12.0f, 0) {
 	save_folder = File(world->GetSaveFolder().GetChild(name));
 	save_folder.MakeDirectory();
 	GetChunksFolder().MakeDirectory();
@@ -115,8 +116,8 @@ void Dimension::Render(const age::UpdateInfo &info) {
 	Game::Current()->GetDevice()->GetSceneManager()->GetCamera()->UpdateProgram(&shader_program, FMat4(1.0f));
 	
 	
-	for (int x = chunk_x - 2; x < chunk_x + 2; ++x) {
-		for (int z = chunk_z - 2; z < chunk_z + 2; ++z) {
+	for (int x = chunk_x - 1; x < chunk_x + 1; ++x) {
+		for (int z = chunk_z - 1; z < chunk_z + 1; ++z) {
 			// Render the chunk
 			Chunk *chunk = GetChunk(x, z, true);
 			chunk->Render(info);

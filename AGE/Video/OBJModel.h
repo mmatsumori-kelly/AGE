@@ -18,6 +18,7 @@ namespace age {
 		
 		
 		
+		/** Don't worry about this, it's not used */
 		class OBJModel : public IModel {
 			unsigned int vao, vbo;
 			std::vector<VertexInfo> vertex_data;

@@ -8,7 +8,7 @@
 
 #include "Environment.h"
 #include <unistd.h>
-
+#include <iostream>
 using namespace age;
 
 #if __IS_UNIX
@@ -24,17 +24,19 @@ Environment::Environment() {
 	
 	
 	/* Unix Platform */
-#if __IS_UNIX
+//#if __IS_UNIX
 	uid_t uid = geteuid();
 	struct passwd *pw = getpwuid(uid);
 	
 	
 	if ( pw ) {
 		user_name = pw->pw_name;
-		user_folder = File(pw->pw_dir);
+		user_folder = File("/Users/" + user_name);
+		
+		std::cout << user_folder.GetPath() << std::endl;
 	}
 	
-#endif
+//#endif
 	
 }
 Environment::~Environment() {

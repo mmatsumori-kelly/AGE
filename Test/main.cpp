@@ -8,17 +8,9 @@
 
 #include "Game.h"
 
-using namespace age;
-using namespace age::scene;
-using namespace age::video;
-
-
 
 int main(int argc, const char * argv[]) {
-	using namespace age;
-	
-	
-	shootergame::Game::Current()->Start();
-	
-	return 0;
+	shootergame::Game *game = new shootergame::Game();
+	game->Start();
+	delete game;
 }

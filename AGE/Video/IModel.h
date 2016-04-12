@@ -35,13 +35,14 @@ namespace age {
 		};
 		
 		
-		
+		/** Model interface */
 		class IModel : public IRefCounted {
 		public:
 			virtual ~IModel() { }
 			
-			
+			/** Returns this model's vertex info */
 			virtual std::vector<VertexInfo>& GetVertexInfo() = 0;
+			/** Renders the model */
 			virtual void Render() = 0;
 		};
 		
