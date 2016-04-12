@@ -61,27 +61,11 @@
 		DB34545D1C838D1B00858C10 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1FB44B1C80651F00FBB1F8 /* CoreVideo.framework */; };
 		DB34545E1C838D1B00858C10 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1FB4491C80651600FBB1F8 /* Cocoa.framework */; };
 		DB34545F1C838D1B00858C10 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEA56371C7F91B20048167E /* libglfw3.a */; };
-		DB3454601C838D1B00858C10 /* libBulletCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454421C838CF400858C10 /* libBulletCollision.a */; };
-		DB3454611C838D1B00858C10 /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454431C838CF400858C10 /* libBulletDynamics.a */; };
-		DB3454621C838D1B00858C10 /* libBulletMultiThreaded.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454441C838CF400858C10 /* libBulletMultiThreaded.a */; };
-		DB3454631C838D1B00858C10 /* libBulletSoftBody.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454451C838CF400858C10 /* libBulletSoftBody.a */; };
-		DB3454641C838D1B00858C10 /* libBulletSoftBodySolvers_OpenCL_Apple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454461C838CF400858C10 /* libBulletSoftBodySolvers_OpenCL_Apple.a */; };
-		DB3454651C838D1B00858C10 /* libBulletSoftBodySolvers_OpenCL_Mini.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454471C838CF400858C10 /* libBulletSoftBodySolvers_OpenCL_Mini.a */; };
-		DB3454661C838D1B00858C10 /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454481C838CF400858C10 /* libLinearMath.a */; };
-		DB3454671C838D1B00858C10 /* libMiniCL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454491C838CF400858C10 /* libMiniCL.a */; };
 		DB3454681C838D2900858C10 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1FB44F1C80652C00FBB1F8 /* OpenGL.framework */; };
 		DB3454691C838D2900858C10 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1FB44D1C80652300FBB1F8 /* IOKit.framework */; };
 		DB34546A1C838D2900858C10 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1FB44B1C80651F00FBB1F8 /* CoreVideo.framework */; };
 		DB34546B1C838D2900858C10 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1FB4491C80651600FBB1F8 /* Cocoa.framework */; };
 		DB34546C1C838D2900858C10 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEA56371C7F91B20048167E /* libglfw3.a */; };
-		DB34546D1C838D2900858C10 /* libBulletCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454421C838CF400858C10 /* libBulletCollision.a */; };
-		DB34546E1C838D2900858C10 /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454431C838CF400858C10 /* libBulletDynamics.a */; };
-		DB34546F1C838D2900858C10 /* libBulletMultiThreaded.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454441C838CF400858C10 /* libBulletMultiThreaded.a */; };
-		DB3454701C838D2900858C10 /* libBulletSoftBody.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454451C838CF400858C10 /* libBulletSoftBody.a */; };
-		DB3454711C838D2900858C10 /* libBulletSoftBodySolvers_OpenCL_Apple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454461C838CF400858C10 /* libBulletSoftBodySolvers_OpenCL_Apple.a */; };
-		DB3454721C838D2900858C10 /* libBulletSoftBodySolvers_OpenCL_Mini.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454471C838CF400858C10 /* libBulletSoftBodySolvers_OpenCL_Mini.a */; };
-		DB3454731C838D2900858C10 /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454481C838CF400858C10 /* libLinearMath.a */; };
-		DB3454741C838D2900858C10 /* libMiniCL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3454491C838CF400858C10 /* libMiniCL.a */; };
 		DB3454771C838D9600858C10 /* PhysicsWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB3454751C838D9600858C10 /* PhysicsWorld.cpp */; };
 		DB3454781C838D9600858C10 /* PhysicsWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB3454751C838D9600858C10 /* PhysicsWorld.cpp */; };
 		DB3454791C838D9600858C10 /* PhysicsWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = DB3454761C838D9600858C10 /* PhysicsWorld.h */; };
@@ -204,14 +188,6 @@
 		DB281EB71C7C587000DB7883 /* ISceneNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISceneNode.h; path = Scene/ISceneNode.h; sourceTree = "<group>"; };
 		DB3454391C838AC300858C10 /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = World.cpp; path = World/World.cpp; sourceTree = "<group>"; };
 		DB34543A1C838AC300858C10 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = World.h; path = World/World.h; sourceTree = "<group>"; };
-		DB3454421C838CF400858C10 /* libBulletCollision.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBulletCollision.a; path = Libraries/lib/bullet/libBulletCollision.a; sourceTree = "<group>"; };
-		DB3454431C838CF400858C10 /* libBulletDynamics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBulletDynamics.a; path = Libraries/lib/bullet/libBulletDynamics.a; sourceTree = "<group>"; };
-		DB3454441C838CF400858C10 /* libBulletMultiThreaded.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBulletMultiThreaded.a; path = Libraries/lib/bullet/libBulletMultiThreaded.a; sourceTree = "<group>"; };
-		DB3454451C838CF400858C10 /* libBulletSoftBody.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBulletSoftBody.a; path = Libraries/lib/bullet/libBulletSoftBody.a; sourceTree = "<group>"; };
-		DB3454461C838CF400858C10 /* libBulletSoftBodySolvers_OpenCL_Apple.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBulletSoftBodySolvers_OpenCL_Apple.a; path = Libraries/lib/bullet/libBulletSoftBodySolvers_OpenCL_Apple.a; sourceTree = "<group>"; };
-		DB3454471C838CF400858C10 /* libBulletSoftBodySolvers_OpenCL_Mini.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBulletSoftBodySolvers_OpenCL_Mini.a; path = Libraries/lib/bullet/libBulletSoftBodySolvers_OpenCL_Mini.a; sourceTree = "<group>"; };
-		DB3454481C838CF400858C10 /* libLinearMath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLinearMath.a; path = Libraries/lib/bullet/libLinearMath.a; sourceTree = "<group>"; };
-		DB3454491C838CF400858C10 /* libMiniCL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMiniCL.a; path = Libraries/lib/bullet/libMiniCL.a; sourceTree = "<group>"; };
 		DB3454751C838D9600858C10 /* PhysicsWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PhysicsWorld.cpp; path = Scene/PhysicsWorld.cpp; sourceTree = "<group>"; };
 		DB3454761C838D9600858C10 /* PhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsWorld.h; path = Scene/PhysicsWorld.h; sourceTree = "<group>"; };
 		DB34547B1C8390C300858C10 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -274,14 +250,6 @@
 				DB34546B1C838D2900858C10 /* Cocoa.framework in Frameworks */,
 				DB34546C1C838D2900858C10 /* libglfw3.a in Frameworks */,
 				DBC34FD51C8F73E3006B7BB3 /* liblua.a in Frameworks */,
-				DB34546D1C838D2900858C10 /* libBulletCollision.a in Frameworks */,
-				DB34546E1C838D2900858C10 /* libBulletDynamics.a in Frameworks */,
-				DB34546F1C838D2900858C10 /* libBulletMultiThreaded.a in Frameworks */,
-				DB3454701C838D2900858C10 /* libBulletSoftBody.a in Frameworks */,
-				DB3454711C838D2900858C10 /* libBulletSoftBodySolvers_OpenCL_Apple.a in Frameworks */,
-				DB3454721C838D2900858C10 /* libBulletSoftBodySolvers_OpenCL_Mini.a in Frameworks */,
-				DB3454731C838D2900858C10 /* libLinearMath.a in Frameworks */,
-				DB3454741C838D2900858C10 /* libMiniCL.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,14 +263,6 @@
 				DB34545D1C838D1B00858C10 /* CoreVideo.framework in Frameworks */,
 				DB34545E1C838D1B00858C10 /* Cocoa.framework in Frameworks */,
 				DB34545F1C838D1B00858C10 /* libglfw3.a in Frameworks */,
-				DB3454601C838D1B00858C10 /* libBulletCollision.a in Frameworks */,
-				DB3454611C838D1B00858C10 /* libBulletDynamics.a in Frameworks */,
-				DB3454621C838D1B00858C10 /* libBulletMultiThreaded.a in Frameworks */,
-				DB3454631C838D1B00858C10 /* libBulletSoftBody.a in Frameworks */,
-				DB3454641C838D1B00858C10 /* libBulletSoftBodySolvers_OpenCL_Apple.a in Frameworks */,
-				DB3454651C838D1B00858C10 /* libBulletSoftBodySolvers_OpenCL_Mini.a in Frameworks */,
-				DB3454661C838D1B00858C10 /* libLinearMath.a in Frameworks */,
-				DB3454671C838D1B00858C10 /* libMiniCL.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,14 +414,6 @@
 				DB1FB4491C80651600FBB1F8 /* Cocoa.framework */,
 				DBEA56371C7F91B20048167E /* libglfw3.a */,
 				DBC34FD31C8F73D2006B7BB3 /* liblua.a */,
-				DB3454421C838CF400858C10 /* libBulletCollision.a */,
-				DB3454431C838CF400858C10 /* libBulletDynamics.a */,
-				DB3454441C838CF400858C10 /* libBulletMultiThreaded.a */,
-				DB3454451C838CF400858C10 /* libBulletSoftBody.a */,
-				DB3454461C838CF400858C10 /* libBulletSoftBodySolvers_OpenCL_Apple.a */,
-				DB3454471C838CF400858C10 /* libBulletSoftBodySolvers_OpenCL_Mini.a */,
-				DB3454481C838CF400858C10 /* libLinearMath.a */,
-				DB3454491C838CF400858C10 /* libMiniCL.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";

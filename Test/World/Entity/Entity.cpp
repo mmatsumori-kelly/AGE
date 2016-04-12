@@ -10,7 +10,6 @@
 #include "../Dimension.h"
 #include "../TypeRegistry.h"
 #include "../Raycast.h"
-#include <BulletPhysics/btBulletDynamicsCommon.h>
 
 using namespace age;
 using namespace age::scene;

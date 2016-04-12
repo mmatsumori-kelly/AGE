@@ -36,8 +36,6 @@ namespace shootergame {
 	
 	/** Returns a block id, given a name */
 	int GetBlockID(const std::string &name);
-	/** Returns a block's collision shape */
-	age::scene::CollisionShape* GetBlockCollisionShape(int block_id);
 	/** Returns a block name, given an id */
 	std::string GetBlockName(int id);
 	
